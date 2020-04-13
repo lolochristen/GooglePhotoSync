@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\Ampeross-Qetto-2-Sync.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Ampeross-Qetto-2-Sync.ico" />
+    <None Remove="Assets\download.png" />
+    <None Remove="Assets\error.png" />
+    <None Remove="Assets\error2.png" />
+    <None Remove="Assets\ok.png" />
+    <None Remove="Assets\settings.png" />
+    <None Remove="Assets\sync-icon.png" />
+    <None Remove="Assets\sync.png" />
+    <None Remove="client_secret.json" />
+    <None Remove="sync.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="client_secret.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Ampeross-Qetto-2-Sync.ico" />
+    <Resource Include="Assets\download.png" />
+    <Resource Include="Assets\error.png" />
+    <Resource Include="Assets\error2.png" />
+    <Resource Include="Assets\ok.png" />
+    <Resource Include="Assets\settings.png" />
+    <Resource Include="Assets\sync-icon.png" />
+    <Resource Include="Assets\sync.png" />
+    <Resource Include="sync.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Gkmo.Google.Apis.PhotosLibrary.v1" Version="1.36.1.1471" />
+  </ItemGroup>
+
+</Project>
