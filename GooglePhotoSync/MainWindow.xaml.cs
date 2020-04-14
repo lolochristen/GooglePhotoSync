@@ -81,10 +81,12 @@ namespace GooglePhotoSync
             var settingsWindow = new SettingsWindow();
             settingsWindow.Owner = this;
             settingsWindow.LocalPhotosPath = _syncClient.Settings.LocalPhotosPath;
+            settingsWindow.ConcurrentDonwloads.Text = _syncClient.Settings.ConcurrentDownloads.ToString();
             if (settingsWindow.ShowDialog() == true)
             {
                 // save 
                 _syncClient.Settings.LocalPhotosPath = settingsWindow.LocalPhotosPath;
+                try { _syncClient.Settings.ConcurrentDownloads = int.Parse(settingsWindow.ConcurrentDonwloads.Text); } catch { }
                 _syncClient.SaveSettings();
             }
         }

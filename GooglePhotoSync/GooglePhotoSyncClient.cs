@@ -32,8 +32,7 @@ namespace GooglePhotoSync
 
         public GooglePhotoSyncClient()
         {
-            Settings = new GooglePhotoSyncClientSettings() { LocalPhotosPath = ".\\" };
-            _downloadTaskScheduler = new LimitedConcurrencyLevelTaskScheduler(4);
+            Settings = new GooglePhotoSyncClientSettings() { LocalPhotosPath = ".\\", ConcurrentDownloads = 4 };
             DownloadItems = new ObservableCollection<DownloadItem>();
             RemoveItemWhenDowloaded = false;
         }
@@ -71,6 +70,7 @@ namespace GooglePhotoSync
         public class GooglePhotoSyncClientSettings
         {
             public string LocalPhotosPath { get; set; }
+            public int ConcurrentDownloads { get; set; }
         }
 
         public ClientSecrets GetLocalClientSecrets()
@@ -113,6 +113,9 @@ namespace GooglePhotoSync
 
         public Task StartDownloadAsync()
         {
+            if (Settings.ConcurrentDownloads == 0)
+                Settings.ConcurrentDownloads = 4;
+            _downloadTaskScheduler = new LimitedConcurrencyLevelTaskScheduler(Settings.ConcurrentDownloads);
             TaskFactory factory = new TaskFactory(_downloadTaskScheduler);
 
             var syncContext = SynchronizationContext.Current;
